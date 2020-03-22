@@ -1,0 +1,12 @@
+# This goes in ~/.ssh/
+# Read more about SSH config files: https://linux.die.net/man/5/ssh_config
+
+# This is my baseline recommended ssh config 
+# Just replace <uniqname> with your uniqname and should be good to go
+Host umich
+    HostName login-course.engin.umich.edu
+    User <uniqname>
+    Port 22
+    ControlPath ~\.ssh\master\%r@%h:%p
+    ControlMaster auto
+    ControlPersist 15m
