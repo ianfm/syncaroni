@@ -139,9 +139,11 @@ I think that's it. You should have a working Live Share session with read/write 
 
 # Bonus Round: SSH config
 
-If you know how to set up an ssh config, go you. If not, it's pretty easy(ish).
+If you already have an ssh config, go you. If not, I've provided the basic version of what I use to login to CAEN servers.
 
-* As shown in host setup section:
+See file 'config' and put it in `~/.ssh` on your local WSL instance (and your local .ssh if you have it installed on Windows and find it handy)
+
+Also see references pertaining to rsync, ControlMaster, SSH multiplexing, and ssh-config at the end if you want to learn more.
 
 
 # Known Issues
