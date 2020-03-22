@@ -56,8 +56,8 @@ Set up VS Code environment by installing extensions and testing the workflow
 	|  ---                          | ---                                   |    
 	| Live Share *by Microsoft*     | Remote-SSH *by Microsoft*           	|   
 	| Remote-WSL *by Microsoft*     | TCL *by rashwell*                     |
-	|   |                           |  Verilog HDL/SystemVerilog *by msr-h* |   
-	|   |                           | Better Comments *by Aaron Bond*       |  
+	|                            |  Verilog HDL/SystemVerilog *by msr-h* |   
+	|                            | Better Comments *by Aaron Bond*       |  
 
 	Note: Remote-SSH is my preference for solo work, though incompatible with Live Share. It plays kinda sorta nicely-ish with [ControlMaster][^1]...  
 2. Open Remote-WSL session (click the little green [><] guy in bottom left of VS Code window, then Remote-WSL: New Window)
@@ -102,7 +102,7 @@ Examples of the filepaths we care about (with some other junk for context) are:
 
 and 
 
-> `REMOTE_BASEDIR/groupXw20/verilog`  
+> `~/REMOTE_BASEDIR/groupXw20/verilog`  
 > should be same as  
 > `CaenComputer:~/some/other/pleasant/path/groupXw20/verilog`  
 > i.e.  
