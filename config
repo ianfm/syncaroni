@@ -3,10 +3,10 @@
 
 # This is my baseline recommended ssh config 
 # Just replace <uniqname> with your uniqname and should be good to go
-Host umich
-    HostName login-course.engin.umich.edu
+
+Host login.engin.umich.edu
     User <uniqname>
     Port 22
-    ControlPath ~\.ssh\master\%r@%h:%p
+    ControlPath ~/.ssh/%r@%h:%p
     ControlMaster auto
     ControlPersist 15m
