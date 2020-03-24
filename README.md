@@ -34,7 +34,7 @@ to get the whole picture (literally, since there are pictures 👌)
 
 
 ## WSL Dependencies
-
+>
 Do the following in your bash shell
 
 1. Install ssh and make (need the root password you made when initializing your distro)  
@@ -85,9 +85,24 @@ Set up VS Code environment by installing extensions and testing the workflow
 	.PHONY: sync2caen
 	```
 
+## Bonus Round: SSH config
+
+See file 'config' and copy it to `~/.ssh` on your local WSL instance (and your local .ssh if you have it installed on Windows and find it handy)
+
+If you already have an ssh config, I would recommend adding the entry from mine into yours. If not, I've provided the baseline functionality needed to enable ssh multiplexing, which means tunneling many connections through one master. What it means in practice is fewer password entries and fewer duo prompts.
+
+Note: while this is not strictly required, it is **HIGHLY RECOMMENDED**. Without it, you will have to enter your password every time you sync your files, which makes the whole collaboration thing harder.
+
+
+Also see references regarding rsync, ControlMaster, SSH multiplexing, and ssh-config at the end if you want to learn more.
+
+
 That's it for setup! 
 
 [^1]: <https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Multiplexing> "SSH Multiplexing"
+
+-----
+-----
 
 # Hosting a session
 
@@ -137,43 +152,35 @@ and
 
 I think that's it. You should have a working Live Share session with read/write access to project files and a terminal for building and testing!
 
-# Bonus Round: SSH config
-
-If you already have an ssh config, go you. If not, I've provided the basic version of what I use to login to CAEN servers.
-
-See file 'config' and put it in `~/.ssh` on your local WSL instance (and your local .ssh if you have it installed on Windows and find it handy)
-
-Also see references pertaining to rsync, ControlMaster, SSH multiplexing, and ssh-config at the end if you want to learn more.
-
+---
+---
 
 # Known Issues
 
 There's some real shit here.
 
 ## Usage Problems
+
 - git remote actions (fetch, push, pull) can only be done by the session host since a password is required 
 	- Unless you have an ssh key set up, in which case it might work. Haven't tested.
-- Syncing to CAEN can currently only be done by session host, which should NOT be a problem.
-	- If ControlMaster worked properly (or possibly if I were less of a bungling fool) then the password would only be needed once, which would effectively solve the issue.
-- The need for an extra makefile seems dumb. Setting this up to accommodate multiple users would be more dumb.
+- The need for an extra makefile seems dumb. 
+	- Setting this up to accommodate multiple users would be more dumb. I don't love the extra makefile but it's what I've got
 - DUO is the root of all evil
 	- get a yubikey for free from computer showcase (I hear they deliver now) 
 	- then you just tap a dongle instead of pressing 1
 	- make a shorter password if u spicy
 - ??? Pls fill in!
 
+
 ## Things that Should Work
-- ControlMaster works for ssh sessions started in the terminal, but not for rsync started via Makefile. Could be a shell environment issue? But the way I have it set up (with ssh-config), should be independent of shell env I think.
-- ???
+
+- ControlMaster works for ssh sessions started in the terminal, but not for rsync started via Makefile.
+	- Fixed! Anyone should be able to sync once the host sets up the first/master ssh connection
+
 
 ## Proposed Solutions (or paths to them)
 
-- ControlMaster not working for rsync
-	- git gud
-	- Look further into Darden's course material (seems to be open access) for ControlMaster and ssh-config setup
-	- read more rsync documentation
-	- try using a jump server, maybe w/ proxy command: nc something something dark side
-- session joinees can't run git push
+- Session joinees can't run git push
 	- consider making a group email account with bitbucket access, shared password/key?
 
 # Troubleshooting
@@ -185,10 +192,10 @@ There's some real shit here.
 		You should probably be in LOCAL_DIR/groupXw20. Else if you really wanna be there, run `make -F sync.mk sync2caen`
 * ssh borked, something like 'key not accepted' when trying to connect to CAEN
 	* you might have ssh-agent running. You can check with some variation on `top` then `h` or maybe that `ps -aux grep "ssh"` from linux lab slides
-- Fork I should probably upload this instead of thinking of more stupid problems you'll have (/I've had). Have fun!
 
 
-
+---
+---
 
 
 # Links and References
