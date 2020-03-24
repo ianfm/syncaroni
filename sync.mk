@@ -21,6 +21,9 @@ REMOTE_BASEDIR := Private/470-project
 # e.g. pwd returns project0, then
 # REMOTE_BASEDIR := w18/eecs281    # copies files to /home/mmdarden/w18/eecs281/project0
 
+REPO := group3w20
+LOCAL_DIR := ~/code/
+
 # If you want to check the paths being used / dir syncing options
 # echopath:
 # 	echo "REMOTE_PATH := ${REMOTE_BASEDIR}/$(notdir $(shell pwd))"
@@ -38,9 +41,10 @@ sync2caen:
 	rsync \
 		-av \
 		--delete \
-		--exclude 'group3w20/.git*' \
-		--filter=":- group3w20/.gitignore" \
-		./group3w20 \
+		--exclude '${REPO}/.git*' \
+		--filter=":- ${REPO}/.gitignore" \
+		${LOCAL_DIR} \
+		-e "ssh login.engin.umich.edu" \
 		"login.engin.umich.edu:${REMOTE_PATH}/"
 
 .PHONY: sync2caen
